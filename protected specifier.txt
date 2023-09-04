@@ -1,0 +1,2 @@
+As the files are created in the same folder they belong to the same package, So the protected members of the shape class can be accessed by the config class as object of Shape has been created.
+Protected members can be accessed by classes of same package and sub classes of different packages. 
