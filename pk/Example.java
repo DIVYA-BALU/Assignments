@@ -2,7 +2,7 @@ package pk;
 class Example{
     int n1,n2;
     Example(){
-        System.out.println("Explicit default");
+        System.out.println("Explicit default : "+this);
     }
     Example(int n1,int n2){
         this();//constructor chaining
