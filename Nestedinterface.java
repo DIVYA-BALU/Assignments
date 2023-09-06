@@ -4,6 +4,13 @@ interface outer{
         void innerdisplay();
     }
 }
+interface Testable{
+    class Insideinterface{//by default public and static
+        void disp1(){
+            System.out.println("Class inside interface");
+        }
+    }
+}
 class IFace{
     interface InterfaceInClass{
         void disp();
@@ -33,5 +40,9 @@ public class Nestedinterface {
         ob1.outerdisplay();
         IFace.InterfaceInClass i=new Test1();
         i.disp();
+        Testable.Insideinterface tc = new Testable.Insideinterface(); 
+        tc.disp1();
+
+
     }
 }
