@@ -1,16 +1,16 @@
 interface Calc{
-    void add(int n1,int n2) throws UserException;
+    void divide(int n1,int n2) throws UserException;
 }
 class UserException extends Exception{
     UserException(String message){
         super(message);
     }
 }
-class Add implements Calc{
-    public void add(int n1,int n2)throws UserException{
+class Divide implements Calc{
+    public void divide(int n1,int n2)throws UserException{
         try{
-            if(n1<0 || n2<0)
-                throw new Exception("No negative numbers");
+            if(n2==0)
+                throw new Exception("cannot divide by zero");
             System.out.println(n1+n2);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -20,8 +20,8 @@ class Add implements Calc{
 
 public class exception {
     public static void main(String args[]) throws Exception{
-        Calc a=new Add();
-        a.add(-1,10);    
+        Calc a=new Divide();
+        a.divide(10,0);    
         
     }
 }
