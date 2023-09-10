@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 interface Cards{
      int draw(Random random);
-     int Total(List<Integer> hand);
+     int Total(List<Integer> cards);
 }
 class Game implements Cards{
     public int draw(Random random) {
-        return random.nextInt(10) + 2; // Values from 2 to 11
+        return random.nextInt(10) + 2; 
     }
-    public  int Total(List<Integer> hand) {
+    public  int Total(List<Integer> cards) {
         int total = 0;
-        int numAces = 0;
+        int Ace = 0;
 
-        for (int card : hand) {
+        for (int card : cards) {
             if (card == 11) {
-                numAces++;
+                Ace++;
             }
             total += card;
         }
 
-        while (total > 21 && numAces > 0) {
-            total -= 10; // Convert an Ace from 11 to 1
-            numAces--;
+        while (total > 21 && Ace > 0) {
+            total -= 10; 
+            Ace--;
         }
 
         return total;
@@ -66,7 +66,7 @@ public class blackjack {
 
                 if (p_total > 21) {
                     System.out.println("Bust! Dealer wins");
-                    break;
+                    System.exit(0);
                 }
             } else if (choice.equals("stay")) {
                 break;
