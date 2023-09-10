@@ -1,54 +1,54 @@
 import java.util.Scanner;
 import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 interface Cards{
-     int draw(Random random);
-     int Total(List<Integer> cards);
+    HashMap <Integer,Integer> card = new HashMap<Integer,Integer>()
+    { 
+    {put(2,4);
+    put(3,4);
+    put(4,4);
+    put(5,4);
+    put(6,4);
+    put(7,4);
+    put(8,4);
+    put(9,4);
+    put(10,4);
+    put(11,16);
+    }
+};
+    int draw(Random random);
 }
 class Game implements Cards{
     public int draw(Random random) {
-        return random.nextInt(10) + 2; 
-    }
-    public  int Total(List<Integer> cards) {
-        int total = 0;
-        int Ace = 0;
-
-        for (int card : cards) {
-            if (card == 11) {
-                Ace++;
-            }
-            total += card;
+        int ran= random.nextInt(10) + 2; 
+        if(card.get(ran)==0){
+            return draw(random);
         }
-
-        while (total > 21 && Ace > 0) {
-            total -= 10; 
-            Ace--;
-        }
-
-        return total;
+        card.replace(ran, card.get(ran), card.get(ran)-1);
+        return ran;
+        
     }
 }
 public class blackjack {
     public static void main(String args[]){
-         Random random =new Random();
-         List<Integer> player = new ArrayList<>();
-         List<Integer> dealer = new ArrayList<>();
+        Random random =new Random();
+        int p_total = 0;
+        int d_total = 0;
         System.out.println("****************  Game Blackjack  ****************");
         Scanner sc=new Scanner(System.in);
         Game g=new Game();
-        player.add(g.draw(random));
-        player.add(g.draw(random));
+        int p1=g.draw(random);
+        int p2=g.draw(random);
 
-        dealer.add(g.draw(random));
-        dealer.add(g.draw(random));
+        int d1=g.draw(random);
+        int d2=g.draw(random);
         
-        System.out.println("You get a " + player.get(0) + " and a " + player.get(1) + ".");
-        int p_total = g.Total(player);
-        System.out.println("Your total is " + p_total + ".");
+        p_total=p1+p2;
+        System.out.println("You get a " + p1 + " and a " + p2);
+        System.out.println("Your total is " + p_total);
         System.out.println("\n");
 
-        System.out.println("The dealer has a " + dealer.get(0) + " showing, and a hidden card.");
+        System.out.println("The dealer has a " + d1 + " showing, and a hidden card");
         System.out.println("His total is hidden, too \n");
         
         // Player's turn
@@ -58,10 +58,9 @@ public class blackjack {
 
             if (choice.equals("hit")) {
                 int card = g.draw(random);
-                player.add(card);
-                p_total = g.Total(player);
-                System.out.println("You drew a " + card + ".");
-                System.out.println("Your total is " + p_total + ".");
+                p_total += card;
+                System.out.println("You drew a " + card);
+                System.out.println("Your total is " + p_total);
                 System.out.println("\n");
 
                 if (p_total > 21) {
@@ -73,15 +72,14 @@ public class blackjack {
             }
         }
         // Dealer's turn
-        int d_total = g.Total(dealer);
-        System.out.println("Okay, dealer's turn.");
-        System.out.println("His hidden card was a " + dealer.get(1) + ".");
+        d_total += d1+d2;
+        System.out.println("Okay, dealer's turn");
+        System.out.println("His hidden card was a " + d2);
         System.out.println("His total was " + d_total + "\n");
 
         while (d_total < 17) {
             int card = g.draw(random);
-            dealer.add(card);
-            d_total = g.Total(dealer);
+            d_total += card;
             System.out.println("Dealer chooses to hit");
             System.out.println("He draws a " + card);
             System.out.println("His total is " + d_total+"\n");
@@ -105,4 +103,5 @@ public class blackjack {
         }
     }
     }
+
 
