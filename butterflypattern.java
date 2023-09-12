@@ -65,6 +65,7 @@ class butterflypattern{
         Scanner sc=new Scanner(System.in);
         System.out.print("Enter the size : ");
         n= sc.nextInt();
+        sc.close();
         int space=2*n-2;
         int val=1;
         p1(val,n,space);

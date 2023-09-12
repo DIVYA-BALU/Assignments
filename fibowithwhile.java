@@ -41,7 +41,7 @@ class fibowithwhile{
         System.out.println("Exited");
         break;
       }
-   
+   sc.close();
   }
        
  }  

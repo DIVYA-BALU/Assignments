@@ -2,9 +2,9 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.HashMap;
 interface Cards{
-    HashMap <Integer,Integer> card = new HashMap<Integer,Integer>()
-    { 
-    {put(2,4);
+    HashMap <Integer,Integer> card = new HashMap<Integer,Integer>(){
+    {
+    put(2,4);
     put(3,4);
     put(4,4);
     put(5,4);
@@ -15,7 +15,7 @@ interface Cards{
     put(10,4);
     put(11,16);
     }
-};
+    };
     int draw(Random random);
 }
 class Game implements Cards{
@@ -71,6 +71,7 @@ public class blackjack {
                 break;
             }
         }
+        sc.close();
         // Dealer's turn
         d_total += d1+d2;
         System.out.println("Okay, dealer's turn");

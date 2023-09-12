@@ -24,6 +24,6 @@ class fibo{
      BigInteger n2 = BigInteger.valueOf(1);
     fibonacci(n1,n2,count); 
   }
-       
+   sc.close();    
  }  
 }  
