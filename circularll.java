@@ -171,7 +171,7 @@ public class circularll {
         Scanner sc=new Scanner(System.in);
         Node n=new Node();
         int choice;
-        do{
+        while(true){
             System.out.println("1.Add First");
             System.out.println("2.Add Last");
             System.out.println("3.Add At particular Position");
@@ -230,6 +230,6 @@ public class circularll {
                    System.out.println("Invalid choice");
                    break;
             }
-        }while(choice!=10);       
+        }      
     }
 }

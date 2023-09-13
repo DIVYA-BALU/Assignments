@@ -63,7 +63,7 @@ public class queueds {
         int length=sc.nextInt();
         queue q=new queue(length);
         int choice;
-        do{
+        while(true){
             System.out.println("1.push");
             System.out.println("2.pop");
             System.out.println("3.peek");
@@ -92,6 +92,6 @@ public class queueds {
                    System.out.println("Invalid choice");
                    break;
             }
-        }while(choice!=5);
+        }
     }
 }

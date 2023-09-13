@@ -49,7 +49,7 @@ public class stackds {
         int length=sc.nextInt();
         stack s= new stack(length);
         int choice;
-        do{
+        while(true){
             System.out.println("1.push");
             System.out.println("2.pop");
             System.out.println("3.Top");
@@ -78,7 +78,7 @@ public class stackds {
                    System.out.println("Invalid choice");
                    break;
             }
-        }while(choice!=5);
+        }
     }
 }
 
