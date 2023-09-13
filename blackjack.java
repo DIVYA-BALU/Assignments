@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.HashMap;
 interface Cards{
-    HashMap <Integer,Integer> card = new HashMap<Integer,Integer>(){
+    HashMap <Integer,Integer> card = new HashMap<Integer,Integer>(){//space complexity O(1) as constant amount of space for map
     {
     put(2,4);
     put(3,4);
@@ -19,7 +19,7 @@ interface Cards{
     int draw(Random random);
 }
 class Game implements Cards{
-    public int draw(Random random) {
+    public int draw(Random random) {//time complexity=2^n (recurrsion)
         int ran= random.nextInt(10) + 2; 
         if(card.get(ran)==0){
             return draw(random);
@@ -52,7 +52,7 @@ public class blackjack {
         System.out.println("His total is hidden, too \n");
         
         // Player's turn
-        while (true) {
+        while (true) {//time complexity O(n)
             System.out.print("Would you like to \"hit\" or \"stay\"? ");
             String choice = sc.nextLine().toLowerCase();
 
@@ -78,7 +78,7 @@ public class blackjack {
         System.out.println("His hidden card was a " + d2);
         System.out.println("His total was " + d_total + "\n");
 
-        while (d_total < 17) {
+        while (d_total < 17) {//time complexity O(n)
             int card = g.draw(random);
             d_total += card;
             System.out.println("Dealer chooses to hit");
