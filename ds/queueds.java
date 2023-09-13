@@ -1,3 +1,4 @@
+package ds;
 import java.util.Scanner;
 
 class queue{
@@ -10,12 +11,12 @@ class queue{
         len=s;
     }
     boolean isEmpty(){
-        if(front==1)
+        if(rear==-1)
             return true;
         return false;
     }
     boolean isFull(){
-        if(front==0 && rear==len-1)
+        if(rear==len-1)
             return true;
         return false;
     }
@@ -24,12 +25,10 @@ class queue{
             System.out.println("Overflow");
             return;
         }
-        if(front==-1){
-            array[++front]=val;
-            rear++;
+        if(rear==-1 && front==-1){
+            front=0;
         }
-        else
-            array[++rear]=val;
+        array[++rear]=val;
 
     }
     void pop(){
@@ -37,15 +36,23 @@ class queue{
             System.out.println("Empty Queue");
             return;
         }
+        if(rear==0){
+            rear--;
+            return;
+        }
         for(int i=0;i<rear;i++)
             array[i]=array[i+1];
-        array[rear--]=0;
+        rear--;
         
     }
     int size(){
         return rear+1;
     }
     void peek(){
+        if(isEmpty()){
+            System.out.println("Empty Queue");
+            return;
+        }
         System.out.println("\nPeek element is : "+array[front]);
     }
     void display(){

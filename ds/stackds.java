@@ -1,3 +1,4 @@
+package ds;
 import java.util.Scanner;
 
 class stack{
@@ -32,6 +33,11 @@ class stack{
         array[top--]=0;
     }
     void top(){
+        if(top==-1)
+        {
+            System.out.println("empty stack");
+            return;
+        }
         System.out.println("The top element : "+array[top]);
     }
     void print(){
@@ -79,14 +85,6 @@ public class stackds {
                    break;
             }
         }
+        
     }
 }
-
-
-//operations
-//push()
-//pop()
-//topElement() / peek()
-//isEmpty()
-//isFull()
-//size()

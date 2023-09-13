@@ -1,12 +1,11 @@
+package ds;
 import java.util.Scanner;
 
 class Node{
     int data;
     Node next;
     int size=0;
-    Node(){
-
-    }
+    Node(){}
     Node(int val){
         data=val;
         next=null;
@@ -156,6 +155,8 @@ class Node{
         node2.next=head.next;
         head.next=temp;
         prev.next=head;
+        if(pos==size-1)
+            tail=prev.next;//if last pos declare it as tail
         head=node2;
 
     }
