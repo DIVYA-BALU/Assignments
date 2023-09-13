@@ -1,54 +1,60 @@
+package ds;
 import java.util.Scanner;
 
 class Node{
     int data;
+    Node prev;
     Node next;
     int size=0;
-    Node(){
-
-    }
+    Node(){}
     Node(int val){
         data=val;
+        prev=null;
         next=null;
     }
     Node head=null;
-    Node tail= null;
+    Node tail=null;
     void addFirst(int val){
         Node newnode = new Node(val);
         if(head==null){
             head=newnode;
             tail=newnode;
-            newnode.next=head;
+            head.prev=head;
+            head.next=head;
             size++;
         }
         else{
-        tail.next=newnode;
-        newnode.next=head;
-        head=newnode;
-        size++;
+            newnode.next=head;
+            head.prev=newnode;
+            tail.next=newnode;
+            newnode.prev=tail;
+            head=newnode;
+            size++;
         }
     }
     void addLast(int val){
-        Node newnode = new Node(val);
         if(head==null){
-            head=newnode;
-            tail=newnode;
-            newnode.next=head;
-            size++;
+            addFirst(val);
+            return;
         }
-        else{
+        Node newnode = new Node(val);
         tail.next=newnode;
+        newnode.prev=tail;
+        newnode.next=head;
+        head.prev=newnode;
         tail=newnode;
-        tail.next=head;
         size++;
-        }
     }
     void addAtPos(int pos, int val){
         if(head==null){
             addFirst(val);
             return;
         }
-        if(pos>size || pos<=0){
+        if(pos>size){
+            addLast(val);
+            return;
+        }
+        if(pos<=0){
             addFirst(val);
             return;
         }
@@ -57,44 +63,42 @@ class Node{
         for(int i=0;i<pos-1;i++)
             curr=curr.next;
         newnode.next=curr.next;
+        newnode.prev=curr;
         curr.next=newnode;
+        newnode.next.prev=newnode;
         size++;
     }
     void delFirst(){
         if(head==null)
             System.out.println("List is empty");
-        else {    
-            if(head != tail ) {  
-                head = head.next;  
-                tail.next = head;  
-                size--;
-            }   
-            else {  
-                head = tail = null; 
-                size--; 
-            }  
-        }  
+        else{
+            head=head.next;
+            head.prev.next=null;
+            head.prev=tail;
+            tail.next=head;
+            size--;
+        }
     }
     void delLast(){
         Node temp=head;
         if(head==null)
             System.out.println("List is empty");
         else{
-            while(temp.next.next!=head)
+            while(temp.next!=tail)
                 temp=temp.next;
+            temp.next.prev=null;
+            temp.next.next=null;
             temp.next=head;
-            tail.next=null;
             tail=temp;
+            head.prev=tail;
             size--;
         }
 
     }
     void delAtPos(int pos){
         Node temp=head;
-        if(head==null){
+        if(head==null)
             System.out.println("List is empty"); 
-            return;
-        }
         if(pos<0||pos>=size){
             System.out.println("Invalid position");
             return;
@@ -107,16 +111,17 @@ class Node{
             delLast();
             return;
         }
-        for(int i=0;i<pos-1;i++)
-            temp=temp.next;
-        temp.next=temp.next.next;
-        size--; 
+        else{
+            for(int i=0;i<pos;i++)
+                temp=temp.next;
+            temp.prev.next=temp.next;
+            temp.next.prev=temp.prev;
+            temp.prev=null;
+            temp.next=null;
+            size--;
+        } 
     }
     void display(){
-        if(head==null){
-            System.out.println("Empty list");
-            return;
-        }
         Node curr=head;
         System.out.println();
         while(curr.next!=head){
@@ -134,7 +139,7 @@ class Node{
         }
         Node curr=head;
         int index=0;
-        while(curr!=null){
+        while(curr.next!=head){
             if(curr.data==val){
                 System.out.println("\nThe element is found at index "+index);
                 return;
@@ -142,34 +147,30 @@ class Node{
             curr=curr.next;
             index++;
         }
+        if(curr.data==val){
+            System.out.println("\nThe element is found at index "+index);
+            return;
+        }
         System.out.println("\nThe element could not be found");
     }
-    void reverse(){
-        Node prev = tail;
-        Node curr = head;
-        Node temp=head;
-        Node nextnode = null;
-        while (curr != tail) {
-            nextnode = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = nextnode;
+
+    void displayrev(){
+        Node temp=tail;
+        System.out.println();
+        while(temp!=head){
+            System.out.print(temp.data+" ");
+            temp=temp.prev;
         }
-        nextnode = curr.next;
-        curr.next = prev;
-        prev = curr;
-        curr = nextnode;
-        head=prev;
-        tail=temp;
-
-
+        System.out.println(head.data);
+        System.out.println();
     }
     
 }
-public class circularll {
+public class doublecircularll {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         Node n=new Node();
+        System.out.println("Enter a choice");
         int choice;
         while(true){
             System.out.println("1.Add First");
@@ -179,9 +180,9 @@ public class circularll {
             System.out.println("5.Delete Last");
             System.out.println("6.Delete At particular Position");
             System.out.println("7.Search by value");
-            System.out.println("8.Reverse the list");
+            System.out.println("8.Display reverse of list");
             System.out.println("9.Display list");
-            System.out.println("10.Exit");         
+            System.out.println("10.Exit");      
             int val,pos;
             choice=sc.nextInt();
             switch(choice){
@@ -219,7 +220,7 @@ public class circularll {
                     n.search(val);
                     break;
                 case 8:
-                    n.reverse();
+                    n.displayrev();
                     break;
                 case 9:
                     n.display();
@@ -230,6 +231,6 @@ public class circularll {
                    System.out.println("Invalid choice");
                    break;
             }
-        }      
+        }
     }
 }
