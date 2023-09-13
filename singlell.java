@@ -141,14 +141,37 @@ class Node{
         head = prev;
 
     }
+    void swap(int pos){
+        Node temp=null,curr=head,node2=null,prev=null;
+        int index=0;
+        while(curr!=null){
+            if(pos==index+1){
+                prev=curr;
+                node2=curr.next;
+            }
+            curr=curr.next;
+            index++;
+        }
+        temp=node2.next;
+        node2.next=head.next;
+        head.next=temp;
+        prev.next=head;
+        head=node2;
+
+    }
     void swapNode(int pos1,int pos2){
         if(pos1>size-1||pos2>size-1||pos1<0||pos2<0){
             System.out.println("Swap not possible");
             return;
         }
-        // if(pos1==0){
-
-        // }
+        if(pos1==0){
+            swap(pos2);
+            return;
+        }
+        if(pos2==0){
+            swap(pos1);
+            return;
+        }
         Node prev1=null,prev2=null,node1=null,node2=null,curr,temp;
         curr=head;
         int index=0;
