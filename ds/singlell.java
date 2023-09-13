@@ -60,6 +60,8 @@ class Node{
     void delFirst(){
         if(head==null)
             System.out.println("List is empty");
+        else if(size==1)
+            head=tail=null;
         else
             head=head.next;
             size--;
@@ -68,6 +70,8 @@ class Node{
         Node temp=head;
         if(head==null)
             System.out.println("List is empty");
+        else if(size==1)
+            head=tail=null;
         else{
             while(temp.next.next!=null)
                 temp=temp.next;
@@ -101,6 +105,10 @@ class Node{
         size--; 
     }
     void display(){
+        if(head==null){
+            System.out.println("Empty list");
+            return;
+        }
         Node curr=head;
         System.out.println();
         while(curr!=null){

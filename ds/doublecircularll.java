@@ -71,6 +71,8 @@ class Node{
     void delFirst(){
         if(head==null)
             System.out.println("List is empty");
+        else if(size==1)
+            head=tail=null;
         else{
             head=head.next;
             head.prev.next=null;
@@ -83,6 +85,8 @@ class Node{
         Node temp=head;
         if(head==null)
             System.out.println("List is empty");
+        else if(size==1)
+            head=tail=null;
         else{
             while(temp.next!=tail)
                 temp=temp.next;
@@ -164,6 +168,26 @@ class Node{
         System.out.println(head.data);
         System.out.println();
     }
+    void reverse(){
+        if(head==null){
+            System.out.println("Empty list");
+            return;
+        }
+        Node curr=head;
+        Node temp=null;
+        while(curr!=tail){
+            temp = curr.prev;
+            curr.prev = curr.next;
+            curr.next = temp;
+            curr = curr.prev;
+        }
+            temp = curr.prev;
+            curr.prev = curr.next;
+            curr.next = temp;
+            curr = curr.prev;
+        tail=head;
+        head=temp.prev;
+    }
     
 }
 public class doublecircularll {
@@ -182,7 +206,8 @@ public class doublecircularll {
             System.out.println("7.Search by value");
             System.out.println("8.Display reverse of list");
             System.out.println("9.Display list");
-            System.out.println("10.Exit");      
+            System.out.println("10.Reverse the list");
+            System.out.println("11.Exit");      
             int val,pos;
             choice=sc.nextInt();
             switch(choice){
@@ -226,6 +251,9 @@ public class doublecircularll {
                     n.display();
                     break;
                 case 10:
+                    n.reverse();
+                    break;
+                case 11:
                     return;
                 default:
                    System.out.println("Invalid choice");

@@ -64,6 +64,8 @@ class Node{
     void delFirst(){
         if(head==null)
             System.out.println("List is empty");
+        else if(size==1)
+            head=tail=null;
         else {    
             if(head != tail ) {  
                 head = head.next;  
@@ -80,6 +82,8 @@ class Node{
         Node temp=head;
         if(head==null)
             System.out.println("List is empty");
+        else if(size==1)
+            head=tail=null;
         else{
             while(temp.next.next!=head)
                 temp=temp.next;
@@ -146,6 +150,10 @@ class Node{
         System.out.println("\nThe element could not be found");
     }
     void reverse(){
+        if(head==null){
+            System.out.println("Empty list");
+            return;
+        }
         Node prev = tail;
         Node curr = head;
         Node temp=head;
@@ -180,7 +188,7 @@ public class circularll {
             System.out.println("5.Delete Last");
             System.out.println("6.Delete At particular Position");
             System.out.println("7.Search by value");
-            System.out.println("8.Reverse the list");
+            System.out.println("8.Reve rse the list");
             System.out.println("9.Display list");
             System.out.println("10.Exit");         
             int val,pos;
