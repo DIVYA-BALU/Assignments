@@ -126,6 +126,11 @@ class Node{
         } 
     }
     void display(){
+        if(head==null)
+        {
+            System.out.println("\nList empty");
+            return;
+        }
         Node curr=head;
         System.out.println();
         while(curr.next!=head){
@@ -159,6 +164,11 @@ class Node{
     }
 
     void displayrev(){
+        if(head==null)
+        {
+            System.out.println("\nList empty");
+            return;
+        }
         Node temp=tail;
         System.out.println();
         while(temp!=head){
