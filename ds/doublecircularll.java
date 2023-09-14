@@ -75,7 +75,6 @@ class Node{
             head=tail=null;
         else{
             head=head.next;
-            head.prev.next=null;
             head.prev=tail;
             tail.next=head;
             size--;
@@ -90,8 +89,6 @@ class Node{
         else{
             while(temp.next!=tail)
                 temp=temp.next;
-            temp.next.prev=null;
-            temp.next.next=null;
             temp.next=head;
             tail=temp;
             head.prev=tail;
@@ -115,6 +112,8 @@ class Node{
             delLast();
             return;
         }
+        if(size==1)
+            head=tail=null;
         else{
             for(int i=0;i<pos;i++)
                 temp=temp.next;
@@ -191,12 +190,11 @@ class Node{
             curr.next = temp;
             curr = curr.prev;
         }
-            temp = curr.prev;
-            curr.prev = curr.next;
-            curr.next = temp;
-            curr = curr.prev;
-        tail=head;
-        head=temp.prev;
+        temp = curr.prev;
+        curr.prev = curr.next;
+        curr.next = temp;
+        curr = curr.prev;
+        tail=head.prev;
     }
     
 }

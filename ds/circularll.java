@@ -88,7 +88,6 @@ class Node{
             while(temp.next.next!=head)
                 temp=temp.next;
             temp.next=head;
-            tail.next=null;
             tail=temp;
             size--;
         }
