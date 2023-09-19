@@ -12,7 +12,6 @@ class Tree {
         this.data = data;
         this.children = new ArrayList<Tree>();
     }
-    Tree root=null;
     void addNode(Tree root,int parentVal,int inputVal){
         if(root==null){
             System.out.println("parent not found");
@@ -28,8 +27,52 @@ class Tree {
     }
     }
 
-
-    void levelOrderTraversal() {
+    Tree delete(Tree root,Tree parent,int val){
+        if(root==null){
+            System.out.println("Empty tree");
+            return root;
+        }
+        if (root.data == val)
+            { 
+                if(root.children.size()==1){
+                    System.out.println("Found1");
+                    root.data=root.children.get(0).data;
+                    root.children.removeAll(root.children);
+                    return root;
+                }
+                else{
+                    System.out.println("found2");
+                    Tree curr=root.children.get(0);
+                    ArrayList<Tree> temp=new ArrayList<>(curr.children);
+                    root.children.remove(0);
+                    root.children.addAll(temp);
+                    root.data=curr.data;                 
+                    
+                    return root;
+                }
+            }
+        else{
+            for(Tree child:root.children){
+                delete(child,root,val);
+            }
+        }
+        return root;
+    }
+    void preorder(Tree root){
+        if(root==null)
+            return;
+        System.out.print(root.data+" ");
+        for(Tree child: root.children)
+            preorder(child);
+    }
+    void postorder(Tree root){
+        if(root==null)
+            return;
+        for(Tree child: root.children)
+            postorder(child);
+        System.out.print(root.data+" ");
+    }
+    void levelOrderTraversal(Tree root) {
         if (root == null) {
             System.out.println("Empty tree");
             return;
@@ -80,11 +123,12 @@ public class nArraytree {
         int choice;
         while(true){
             System.out.println("\n1.Insert Tree");
-            System.out.println("2.DFS");
-            System.out.println("3.BFS");
-            System.out.println("4.Delete Tree");
-            System.out.println("5.Height of tree");
-            System.out.println("6.Exit");         
+            System.out.println("2.Preorder traversal");
+            System.out.println("3.Postorder traversal");
+            System.out.println("4.BFS");
+            System.out.println("5.Delete Tree");
+            System.out.println("6.Height of tree");
+            System.out.println("7.Exit");         
             choice=sc.nextInt();
             switch(choice){
                 case 1:
@@ -92,29 +136,31 @@ public class nArraytree {
                     int inputKey=sc.nextInt();
                     System.out.println("Enter parent key value : ");
                     int parentkey=sc.nextInt();
-                    if(tree.root==null){
-                        tree.root=new Tree(inputKey);
+                    if(root==null){
+                        root=new Tree(inputKey);
                         System.out.println("Element inserted as root as the tree is null");
-                        root=tree.root;
                     }
                     else
                         tree.addNode(root, parentkey, inputKey);
                     break;
                 case 2:
-                    //tree.DFS(root);
+                    tree.preorder(root);
                     break;
                 case 3:
-                    tree.levelOrderTraversal();
+                    tree.postorder(root);
                     break;
                 case 4:
-                    System.out.println("Enter a value to be deleted : ");
-                    int val=sc.nextInt();
-                    //tree.delete(root, val);
+                    tree.levelOrderTraversal(root);
                     break;
                 case 5:
-                    System.out.println("The height is : "+tree.Height(root));
+                    System.out.println("Enter a value to be deleted : ");
+                    int val=sc.nextInt();
+                    root=tree.delete(root,root,val);
                     break;
                 case 6:
+                    System.out.println("The height is : "+tree.Height(root));
+                    break;
+                case 7:
                     return;                                        
                 default:
                     System.out.println("invalid choice");
