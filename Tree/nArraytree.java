@@ -26,37 +26,36 @@ class Tree {
             addNode(child, parentVal, inputVal);
     }
     }
-
-    Tree delete(Tree root,Tree parent,int val){
+    boolean delete(Tree root,Tree parent,int val){
         if(root==null){
             System.out.println("Empty tree");
-            return root;
+            return true;
         }
         if (root.data == val)
-            { 
-                if(root.children.size()==1){
-                    System.out.println("Found1");
-                    root.data=root.children.get(0).data;
-                    root.children.removeAll(root.children);
-                    return root;
+            {   if(root.children.size()==0){
+                    Tree temp=parent;
+                    temp.children.remove(root);
+                    return true;
                 }
                 else{
-                    System.out.println("found2");
+                    System.out.println("found3");
                     Tree curr=root.children.get(0);
                     ArrayList<Tree> temp=new ArrayList<>(curr.children);
                     root.children.remove(0);
                     root.children.addAll(temp);
                     root.data=curr.data;                 
                     
-                    return root;
+                    return true;
                 }
             }
         else{
             for(Tree child:root.children){
-                delete(child,root,val);
+                if(delete(child,root,val)){
+                    return true;
+                }
             }
         }
-        return root;
+        return false;
     }
     void preorder(Tree root){
         if(root==null)
@@ -89,6 +88,7 @@ class Tree {
                 queue.add(child);
             }
         }
+        System.out.println();
     }
     int Height(Tree root) {
                if (root == null) {
@@ -120,6 +120,7 @@ public class nArraytree {
         Scanner sc=new Scanner(System.in);
         Tree tree= new Tree();
         Tree root=null;
+
         int choice;
         while(true){
             System.out.println("\n1.Insert Tree");
@@ -155,7 +156,7 @@ public class nArraytree {
                 case 5:
                     System.out.println("Enter a value to be deleted : ");
                     int val=sc.nextInt();
-                    root=tree.delete(root,root,val);
+                    tree.delete(root,root,val);
                     break;
                 case 6:
                     System.out.println("The height is : "+tree.Height(root));
