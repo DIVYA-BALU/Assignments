@@ -17,7 +17,7 @@ public class LongestRepeatingCharacterReplacement {
         times=sc.nextInt();
 
         for(int i=0;i<str.length();i++){
-            char ch=str.charAt(i);
+            char ch=str.charAt(i); 
             hp.put(ch,hp.getOrDefault(ch, 0)+1);
             maxRepeatcharcount=Math.max(maxRepeatcharcount, hp.get(ch));
             nonRepeatcharcount=(i-left+1)-maxRepeatcharcount;
