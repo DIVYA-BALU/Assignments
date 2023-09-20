@@ -14,7 +14,6 @@ class Node {
 			key = item;
 			left = right = null;
 		}
-	Node root=null;
 	Node insert(Node root,int key)
 	{
 
