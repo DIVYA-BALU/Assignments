@@ -15,9 +15,9 @@ public class insertionsort {
         for(int i=0;i<size;i++){
             System.out.print(arr[i]+" ");
         }
-        for (int step = 1; step < size; step++) {
-            int key = arr[step];
-            int j = step - 1;
+        for (int i = 1; i < size; i++) {
+            int key = arr[i];
+            int j = i - 1;
 
             while (j >= 0 && key < arr[j]) {
             arr[j + 1] = arr[j];
