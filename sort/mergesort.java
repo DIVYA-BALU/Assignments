@@ -2,7 +2,10 @@ package sort;
 
 import java.util.Scanner;
 
-public class bubblesort {
+public class mergesort {
+    static void MergeSort(int arr[], int low,int high){
+        
+    }
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         System.out.println("Enter the size of array : ");
@@ -15,23 +18,13 @@ public class bubblesort {
         for(int i=0;i<size;i++){
             System.out.print(arr[i]+" ");
         }
-        int count=0;
-        for(int i=0;i<size;i++){
-            for(int j=0;j<size-1-i;j++){
-                if(arr[j]>arr[j+1]){
-                    int temp=arr[j+1];
-                    arr[j+1]=arr[j];
-                    arr[j]=temp;
-                }
-                count++;
-            }
-                
-        }
+        int high=size-1;
+        MergeSort(arr,0,high);
+
         System.out.println("\nAfter sorting");
         for(int i=0;i<size;i++){
             System.out.print(arr[i]+" ");
         }
-        System.out.println("bubble iteration count"+count);
-        sc.close();
+         sc.close();
     }
 }
