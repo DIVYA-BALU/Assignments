@@ -1,0 +1,57 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+  
+class Solution {
+    /**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public void inorder(TreeNode root, ArrayList<Integer> res){
+            if(root==null)
+                return;
+            inorder(root.left,res);
+            res.add(root.val);
+            inorder(root.right,res);
+    }
+    public boolean isValidBST(TreeNode root) {
+        if(root==null)
+            return true;
+        ArrayList<Integer> res=new ArrayList();
+        inorder(root,res);
+        for(int i=0;i<res.size()-1;i++){
+            if(res.get(i)>=res.get(i+1)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+ }
+    public ListNode mergeKLists(ListNode[] lists) {
+         ListNode head=null;
+        if(lists==null) return null;
+        for(ListNode i: lists)
+            head=merge(head,i);
+        return head;
+    }
+}
