@@ -29,5 +29,6 @@ public class LongestRepeatingCharacterReplacement {
             maxLength=Math.max(maxLength,i-left+1);
         }
         System.out.println("The longest repeating lenth after replacement is : "+maxLength);
+        sc.close();
   }
 }
