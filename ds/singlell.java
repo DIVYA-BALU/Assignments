@@ -1,19 +1,19 @@
 package ds;
 import java.util.Scanner;
 
-class Node{
+class ListNode{
     int data;
-    Node next;
+    ListNode next;
     int size=0;
-    Node(){}
-    Node(int val){
+    ListNode(){}
+    ListNode(int val){
         data=val;
         next=null;
     }
-    Node head=null;
-    Node tail= null;
+    ListNode head=null;
+    ListNode tail= null;
     void addFirst(int val){
-        Node newnode = new Node(val);
+        ListNode newnode = new ListNode(val);
         if(head==null){
             head=newnode;
             tail=newnode;
@@ -30,7 +30,7 @@ class Node{
             addFirst(val);
             return;
         }
-        Node newnode = new Node(val);
+        ListNode newnode = new ListNode(val);
         tail.next=newnode;
         tail=newnode;
         size++;
@@ -49,8 +49,8 @@ class Node{
             return;
         }
 
-        Node newnode=new Node(val);
-        Node curr=head;
+        ListNode newnode=new ListNode(val);
+        ListNode curr=head;
         for(int i=0;i<pos-1;i++)
             curr=curr.next;
         newnode.next=curr.next;
@@ -67,7 +67,7 @@ class Node{
             size--;
     }
     void delLast(){
-        Node temp=head;
+        ListNode temp=head;
         if(head==null)
             System.out.println("List is empty");
         else if(size==1)
@@ -82,7 +82,7 @@ class Node{
 
     }
     void delAtPos(int pos){
-        Node temp=head;
+        ListNode temp=head;
         if(head==null){
             System.out.println("List is empty"); 
             return;
@@ -109,7 +109,7 @@ class Node{
             System.out.println("Empty list");
             return;
         }
-        Node curr=head;
+        ListNode curr=head;
         System.out.println();
         while(curr!=null){
             System.out.print(curr.data+" ");
@@ -123,7 +123,7 @@ class Node{
             System.out.println("\nList empty");
             return;
         }
-        Node curr=head;
+        ListNode curr=head;
         int index=0;
         while(curr!=null){
             if(curr.data==val){
@@ -136,9 +136,9 @@ class Node{
         System.out.println("\nThe element could not be found");
     }
     void reverse(){
-        Node prev = null;
-        Node curr = head;
-        Node nextnode = null;
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode nextnode = null;
         while (curr != null) {
             nextnode = curr.next;
             curr.next = prev;
@@ -149,7 +149,7 @@ class Node{
 
     }
     void swap(int pos){
-        Node temp=null,curr=head,node2=null,prev=null;
+        ListNode temp=null,curr=head,node2=null,prev=null;
         int index=0;
         while(curr!=null){
             if(pos==index+1){
@@ -181,7 +181,7 @@ class Node{
             swap(pos1);
             return;
         }
-        Node prev1=null,prev2=null,node1=null,node2=null,curr,temp;
+        ListNode prev1=null,prev2=null,node1=null,node2=null,curr,temp;
         curr=head;
         int index=0;
         while(curr!=null){
@@ -212,7 +212,7 @@ class Node{
 public class singlell {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        Node n=new Node();
+        ListNode n=new ListNode();
         System.out.println("Enter a choice");
         int choice;
         while(true){
